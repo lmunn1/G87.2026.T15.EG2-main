@@ -1,5 +1,5 @@
 """Module """
-from uc3m_consulting import EnterpriseManagementException
+from .enterprise_management_exception import EnterpriseManagementException
 import hashlib
 import json
 import os
@@ -90,7 +90,7 @@ class EnterpriseManager:
         new_record = {
             "project_id": project_id,
             "company_cif": company_cif,
-            "project_achronym": project_acronym,
+            "project_acronym": project_acronym,
             "project_description": project_description,
             "department": department,
             "date": date,
