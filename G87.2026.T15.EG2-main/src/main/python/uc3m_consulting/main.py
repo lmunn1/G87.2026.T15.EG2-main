@@ -4,11 +4,11 @@ import enterprise_project
 def show_md5():
     obj = enterprise_project.EnterpriseProject(
         'A58818501',
-        'PROJ01',
-        'TreasureHunters2',
-        'HR',
-        '01/05/2026',
-        300000.00
+        'PRO01',
+        'ProjectOne',
+        'FINANCE',
+        '31/12/2027',
+        50000.00
     )
     print(obj.project_id)
 
