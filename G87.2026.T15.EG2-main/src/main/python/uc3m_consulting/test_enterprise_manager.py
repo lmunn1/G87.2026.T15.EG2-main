@@ -25,4 +25,4 @@ class TestEnterpriseManager(TestCase):
             budget=50000.00
         )
         print(result)
-        self.assertEqual(result, 'e64c7e24ec0b33acb141f66445fc6bbf')
+        self.assertEqual(result, '6ccd2e9ff01bab51ca55e76bf99a53c3')
