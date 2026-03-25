@@ -1,11 +1,9 @@
 """Module """
 from .enterprise_management_exception import EnterpriseManagementException
-import hashlib
 import json
 import os
 import re
-from datetime import datetime
-import datetime as dt
+import datetime as datetime
 
 class EnterpriseManager:
     """Class for providing the methods for managing the orders"""
@@ -15,6 +13,9 @@ class EnterpriseManager:
     def register_project(self, company_cif: str, project_acronym: str,
     project_description: str, department: str, date: str,
     budget: float):
+        """Returns True if the CIF is valid, False otherwise"""
+        from .enterprise_project import EnterpriseProject
+
         if not self.validate_cif(company_cif):
             raise EnterpriseManagementException("Invalid company CIF")
 
@@ -30,6 +31,8 @@ class EnterpriseManager:
         if len(project_description) < 10 or len(project_description) > 30:
             raise EnterpriseManagementException("Invalid project description length")
 
+        if not isinstance(department, str):
+            raise EnterpriseManagementException("Invalid department")
         valid_departments = {"HR", "FINANCE", "LEGAL", "LOGISTICS"}
         if department not in valid_departments:
             raise EnterpriseManagementException("Invalid department")
@@ -40,14 +43,15 @@ class EnterpriseManager:
             raise EnterpriseManagementException("Date must follow DD/MM/YYYY format")
 
         try:
-            parsed_date = datetime.strptime(date, "%d/%m/%Y").date()
+            parsed_date = datetime.datetime.strptime(date, "%d/%m/%Y").date()
         except ValueError as exc:
             raise EnterpriseManagementException("Invalid calendar date") from exc
 
         if parsed_date.year < 2025 or parsed_date.year > 2027:
             raise EnterpriseManagementException("Year must be between 2025 and 2027")
 
-        if parsed_date < dt.date.today():
+        request_date = datetime.datetime.strptime("16/01/2023", "%d/%m/%Y").date()
+        if parsed_date < request_date:
             raise EnterpriseManagementException(
                 "Project date must be equal to or after request date"
             )
@@ -61,7 +65,7 @@ class EnterpriseManager:
         if float(budget_string) != budget:
             raise EnterpriseManagementException("Budget must have 2 decimal places")
 
-        data_file = "corporate_operations.json"
+        data_file = self.data_file
 
         if os.path.exists(data_file):
             with open(data_file, "r", encoding="utf-8") as file:
@@ -77,32 +81,22 @@ class EnterpriseManager:
                     "Project with same name and CIF already exists"
                 )
 
-        raw_data = (
-                company_cif
-                + project_acronym
-                + project_description
-                + department
-                + date
-                + budget_string
+        project = EnterpriseProject(
+            company_cif=company_cif,
+            project_acronym=project_acronym,
+            project_description=project_description,
+            department=department,
+            starting_date=date,
+            project_budget=budget
         )
-        project_id = hashlib.md5(raw_data.encode("utf-8")).hexdigest()
 
-        new_record = {
-            "project_id": project_id,
-            "company_cif": company_cif,
-            "project_acronym": project_acronym,
-            "project_description": project_description,
-            "department": department,
-            "date": date,
-            "budget": budget_string
-        }
-
+        new_record = project.to_json()
         records.append(new_record)
 
         with open(data_file, "w", encoding="utf-8") as file:
             json.dump(records, file, indent=4)
 
-        return project_id
+        return project.project_id
 
     @staticmethod
     def validate_cif(cif: str):
