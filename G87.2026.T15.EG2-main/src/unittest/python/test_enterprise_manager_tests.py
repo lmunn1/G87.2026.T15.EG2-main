@@ -234,3 +234,15 @@ class TestEnterpriseManager(unittest.TestCase):
                 date='21/05/2026',
                 budget=300000.00
             )
+
+    def test_TC18(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description=12345,
+                department='HR',
+                date='21/05/2026',
+                budget=300000.00
+            )
