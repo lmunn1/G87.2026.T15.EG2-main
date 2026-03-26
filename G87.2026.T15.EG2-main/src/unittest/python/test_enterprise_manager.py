@@ -1,9 +1,9 @@
 import os
-from unittest import TestCase
+import unittest
 from uc3m_consulting import EnterpriseManager, EnterpriseManagementException
 
 
-class TestEnterpriseManager(TestCase):
+class TestEnterpriseManager(unittest.TestCase):
     def setUp(self):
         self.file_path = "corporate_operations.json"
         if os.path.exists(self.file_path):
