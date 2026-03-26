@@ -1,9 +1,10 @@
 """Enterprise Manager module containing METHOD 1 and CIF validation algorithm"""
-from .enterprise_management_exception import EnterpriseManagementException
 import json
 import os
 import re
 import datetime as datetime
+from .enterprise_management_exception import EnterpriseManagementException
+
 
 class EnterpriseManager:
     """Class for providing the methods for managing the orders"""
