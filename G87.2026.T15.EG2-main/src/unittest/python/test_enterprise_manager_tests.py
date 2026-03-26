@@ -390,3 +390,87 @@ class TestEnterpriseManager(unittest.TestCase):
                 date='21/01/2028',
                 budget=300000.00
             )
+
+    def test_TC31(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='29/02/2025',
+                budget=300000.00
+            )
+
+    def test_TC32(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='09/01/2023',
+                budget=300000.00
+            )
+
+    def test_TC33(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/05/2026',
+                budget='300000.00'
+            )
+
+    def test_TC34(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/05/2026',
+                budget=49999.99
+            )
+
+    def test_TC35(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/05/2026',
+                budget=1000000.01
+            )
+
+    def test_TC36(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/05/2026',
+                budget=300000.0
+            )
+
+    def test_TC37(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/05/2026',
+                budget=300000.001
+            )
