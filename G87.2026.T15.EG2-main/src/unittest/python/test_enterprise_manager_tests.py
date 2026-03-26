@@ -4,6 +4,7 @@ from uc3m_consulting import EnterpriseManager, EnterpriseManagementException
 
 
 class TestEnterpriseManager(unittest.TestCase):
+    """Test cases for register_project() method. 37 in total. """
     def setUp(self):
         self.file_path = "corporate_operations.json"
         if os.path.exists(self.file_path):
@@ -460,7 +461,7 @@ class TestEnterpriseManager(unittest.TestCase):
                 project_description='TreasureHunters2',
                 department='HR',
                 date='21/05/2026',
-                budget=300000.0
+                budget=300000
             )
 
     def test_TC37(self):

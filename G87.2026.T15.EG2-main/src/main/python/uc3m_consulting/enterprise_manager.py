@@ -1,4 +1,4 @@
-"""Module """
+"""Enterprise Manager module containing METHOD 1 and CIF validation algorithm"""
 from .enterprise_management_exception import EnterpriseManagementException
 import json
 import os
@@ -13,7 +13,7 @@ class EnterpriseManager:
     def register_project(self, company_cif: str, project_acronym: str,
     project_description: str, department: str, date: str,
     budget: float):
-        """Returns True if the CIF is valid, False otherwise"""
+        """Attempts to register the project, returning the id if successful."""
         from .enterprise_project import EnterpriseProject
 
         if not self.validate_cif(company_cif):
@@ -100,8 +100,8 @@ class EnterpriseManager:
 
     @staticmethod
     def validate_cif(cif: str):
-        """Returns TRUE IF THE IBAN RECEIVED IS VALID SPANISH IBAN,
-        OR FALSE IN OTHER CASE"""
+        """Returns TRUE IF THE CIF RECEIVED IS A VALID SPANISH CIF,
+        FALSE OTHERWISE"""
         if not isinstance(cif, str):
             return False
 
