@@ -330,3 +330,63 @@ class TestEnterpriseManager(unittest.TestCase):
                 date='00/01/2026',
                 budget=300000.00
             )
+
+    def test_TC26(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='32/01/2026',
+                budget=300000.00
+            )
+
+    def test_TC27(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/00/2026',
+                budget=300000.00
+            )
+
+    def test_TC28(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/13/2026',
+                budget=300000.00
+            )
+
+    def test_TC29(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/01/2024',
+                budget=300000.00
+            )
+
+    def test_TC30(self):
+        obj = EnterpriseManager()
+        with self.assertRaises(EnterpriseManagementException):
+            obj.register_project(
+                company_cif='A58818501',
+                project_acronym='PROJ01',
+                project_description='TreasureHunters2',
+                department='HR',
+                date='21/01/2028',
+                budget=300000.00
+            )
